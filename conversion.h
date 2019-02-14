@@ -1,10 +1,9 @@
+// authored by Zicheng He
 #ifndef _CONVERSION_H_
 #define _CONVERSION_H_
 
 #include <cstdlib>
 #include <algorithm>
-#include <math.h>
-#include <iostream>
 
 using namespace std;
 

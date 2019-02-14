@@ -1,5 +1,7 @@
+// authored by Zicheng He
+#include <cstdlib>
+#include <algorithm>
 #include <iostream>
-#include <math.h>
 
 #include "conversion.h"
 

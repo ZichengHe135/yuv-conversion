@@ -1,12 +1,26 @@
+// authored by Zicheng He
 #include <cstdlib>
 #include <algorithm>
-#include <math.h>
-#include <iostream>
 
 #include "conversion.h"
 
 using namespace std;
 
+// inputs:  uint8_t* input: a 3-planes array for YUV in 4:2:0 format
+//          uint32_t w, h: width and height for input YUV array in Y plane
+// output:  uint8_t* output:  a 2-planes array for YUV in 4:4:4 format,
+//                            u and v interleaved on the second plane.
+//          (WARNING)         The array is allocated using malloc(),
+//                            user needs to manually free the pointer
+//                            to avoid memory leak.
+// prerequisite:  The input array must be in 4:2:0 format, in my implementation
+//                I assumed the input 4:2:0 array is sampling the left upper
+//                corner of every 2x2 square. if the sample is mid-sited or
+//                co-sited the error will be slightly larger.
+// description: This implementation uses interpolation to restore lost data
+//              when the image is compress into YUV 4:2:0 format. It will
+//              restore the image to YUV 4:4:4 format which will have 4 times
+//              more samples on chrome components.
 uint8_t* convert420to444(uint8_t *input, uint32_t w, uint32_t h) {
   // calculate size
   uint32_t w_uv = (uint32_t) ceil(w / 2.0);
@@ -27,7 +41,10 @@ uint8_t* convert420to444(uint8_t *input, uint32_t w, uint32_t h) {
   bool isEvenW = (w % 2 == 0);
   bool isEvenH = (h % 2 == 0);
 
-  // loop
+  // loop through every u/v value in u/v planes, every u/v value
+  // will be matched with a 4 pixels (or fewer) block in Y plane
+  // based on different positions for the block we will decide
+  // whether we should do interpolation and how 
   for (uint32_t i = 0; i < w_uv * h_uv; i++) {
     // get 4 pixels in this square
     uint32_t first = 2 * (i % w_uv) + 2 * (i / w_uv) * w;
@@ -43,7 +60,8 @@ uint8_t* convert420to444(uint8_t *input, uint32_t w, uint32_t h) {
    // get the coordinates for uv in uv plane
     uint32_t coord_x_uv = i % w_uv;
     uint32_t coord_y_uv = i / w_uv;
-    
+
+    // check what to do with 2nd/3rd/4th pixels
     if (coord_x_uv == w_uv - 1 && coord_y_uv == h_uv - 1) {
       // on corner down in the right
       // check for if 2nd/3rd/4th pixel exists
