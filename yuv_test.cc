@@ -20,20 +20,20 @@ int main(int argc, char **argv) {
                         5, 6, 7, 8,
                         9, 10, 11, 12,
                         13, 14, 15, 16,
-                        100, 101,
-                        102, 103,
-                        200, 201,
-                        202, 203
+                        50, 100,
+                        100, 200,
+                        200, 150,
+                        150, 100
                         };
-  uint8_t test3 [12] = {1, 2, 3 ,4,
-                        5, 6, 7, 8,
+  uint8_t test3 [10] = {1, 2, 3,
+                        5, 6, 7,
                         1, 3,
                         5, 7
                         };
                         
-  print420(test2, 4, 4);
-  uint8_t* test_444 = convert420to444(test2, 4, 4);
-  print444(test_444, 4, 4);
+  print420(test3, 3, 2);
+  uint8_t* test_444 = convert420to444(test3, 3, 2);
+  print444(test_444, 3, 2);
   
   free(test_444);
   return EXIT_SUCCESS;

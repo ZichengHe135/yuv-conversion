@@ -1,0 +1,53 @@
+    /*
+    // do second
+    if (second % w != 0) {  // second is within width
+      output[second] = input[second];
+      if (second % w == w - 1) {  // on edge
+        // no interpolation
+        plane2_444[second * 2] = u_420[i];
+        plane2_444[second * 2 + 1] = v_420[i];
+      } else {
+        // horizontal interpolation
+        plane2_444[second * 2] = (u_420[i] + u_420[i + 1]) / 2;
+        plane2_444[second * 2 + 1] = (v_420[i] + v_420[i + 1]) / 2;
+      }
+    }
+    
+    // do third
+    if (third / w < h) {  // third is within height
+      output[third] = input[third];
+      if (third / w == h - 1) {  // on edge
+        // no interpolation
+        plane2_444[third * 2] = u_420[i];
+        plane2_444[third * 2 + 1] = v_420[i];
+      } else {
+        // vertical interpolation
+        plane2_444[third * 2] = (u_420[i] + u_420[i + w_uv]) / 2;
+        plane2_444[third * 2 + 1] = (v_420[i] + v_420[i + w_uv]) / 2;
+      }
+    }
+    
+    // do fourth
+    if (fourth / w < h && fourth % w != 0) {  // fourth is within both bounds
+      output[fourth] = input[fourth];
+      if (fourth / w == h - 1 && fourth % w == w - 1) {  // on corner
+        // no interpolation
+        plane2_444[fourth * 2] = u_420[i];
+        plane2_444[fourth * 2 + 1] = v_420[i];
+      } else if (fourth / w == h - 1) {  // on lower edge
+        // horizontal interpolation
+        plane2_444[fourth * 2] = (u_420[i] + u_420[i + 1]) / 2;
+        plane2_444[fourth * 2 + 1] = (v_420[i] + v_420[i + 1]) / 2;
+      } else if (fourth % w == w - 1) {  // on right edge
+        // vertical interpolation
+        plane2_444[fourth * 2] = (u_420[i] + u_420[i + w_uv]) / 2;
+        plane2_444[fourth * 2 + 1] = (v_420[i] + v_420[i + w_uv]) / 2;
+      } else {
+        // diagonal interpolation
+        plane2_444[fourth * 2] = (u_420[i] + u_420[i + 1] +
+                                 u_420[i + w_uv] + u_420[i + w_uv + 1]) / 4;
+        plane2_444[fourth * 2 + 1] = (v_420[i] + v_420[i + 1] +
+                                     v_420[i + w_uv] + v_420[i + w_uv + 1]) / 4;
+      }
+    }
+    */
