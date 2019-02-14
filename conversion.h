@@ -10,7 +10,4 @@ using namespace std;
 
 uint8_t* convert420to444(uint8_t *input, uint32_t w, uint32_t h);
 
-void print420(uint8_t* input, uint32_t w, uint32_t h);
-void print444(uint8_t* input, uint32_t w, uint32_t h);
-
 #endif  // _CONVERSION_H_
