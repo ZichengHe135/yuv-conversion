@@ -4,7 +4,7 @@
 
 #include "conversion.h"
 
-using namespace std;
+//using namespace std;
 
 // inputs:  uint8_t* input: a 3-planes array for YUV in 4:2:0 format
 //          uint32_t w, h: width and height for input YUV array in Y plane
@@ -47,6 +47,8 @@ uint8_t* convert420to444(uint8_t *input, uint32_t w, uint32_t h) {
   // whether we should do interpolation and how 
   for (uint32_t i = 0; i < w_uv * h_uv; i++) {
     // get 4 pixels in this square
+    // in the order of :  1st  2nd
+    //                    3rd  4th
     uint32_t first = 2 * (i % w_uv) + 2 * (i / w_uv) * w;
     uint32_t second = first + 1;
     uint32_t third = first + w;
